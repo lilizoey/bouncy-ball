@@ -1,5 +1,6 @@
 local bump = require "libraries.bump"
 local Ball = require "ball"
+local AI = require "ai"
 local Player = require "player"
 local c = require "constants"
 
@@ -12,10 +13,19 @@ local right_wall = {type = "wall", which = "right"}
 local right_floor = {type = "floor", which = "right"}
 local divider =  {
     type = "divider",
+    which = "all",
     x = c.WIDTH / 2 - (c.METER * 1 / 8),
     y = c.HEIGHT - c.METER * 1.5,
     w = c.METER / 4,
     h = c.METER * 1.5,
+}
+local player_divider = {
+    type = "divider",
+    which = "player",
+    x = c.WIDTH / 2 - (c.METER * 1 / 8),
+    y = 0,
+    w = c.METER / 4,
+    h = c.HEIGHT,
 }
 
 world:add(left_wall, -5, 0, 5, c.HEIGHT)
@@ -23,8 +33,10 @@ world:add(right_wall, c.WIDTH, 0, 5, c.HEIGHT)
 world:add(left_floor, 0, c.HEIGHT, c.WIDTH / 2, 5)
 world:add(right_floor, c.WIDTH / 2, c.HEIGHT, c.WIDTH / 2, 5)
 world:add(divider, divider.x, divider.y, divider.w, divider.h)
+world:add(player_divider, player_divider.x, player_divider.y, player_divider.w, player_divider.h)
 
 local player = Player.new(10, 0, world)
+local player2 = Player.new(c.WIDTH - 10 - Player.w, 0, world)
 
 local hitters = {}
 
@@ -36,6 +48,8 @@ local function prune_hitters()
     end
 end
 
+local ai = AI.new(player2, ball)
+
 function love.load()
     love.window.setMode(c.WIDTH, c.HEIGHT)
 end
@@ -43,6 +57,7 @@ end
 function love.draw()
     ball:draw()
     player:draw()
+    player2:draw()
     love.graphics.setColor(1,1,1)
     love.graphics.rectangle("fill", divider.x, divider.y, divider.w, divider.h)
     for _, obj in pairs(hitters) do
@@ -59,8 +74,10 @@ function love.update(dt)
         for _, obj in pairs(hitters) do
             obj:update(c.TIMESTEP)
         end
+        local maybe_hitter = ai:update(c.TIMESTEP)
         ball:update(c.TIMESTEP)
         player:update(c.TIMESTEP)
+        player2:update(c.TIMESTEP)
         if love.keyboard.isDown("left") then
             player:move("left")
         elseif love.keyboard.isDown("right") then
@@ -69,6 +86,10 @@ function love.update(dt)
             player:move("none")
         end
         timer = timer - c.TIMESTEP
+
+        if maybe_hitter ~= nil then
+            table.insert(hitters, maybe_hitter)
+        end
     end
 end
 

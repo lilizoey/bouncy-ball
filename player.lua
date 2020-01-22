@@ -6,6 +6,7 @@ local Player = {
     w = c.METER * 0.5,
     h = c.METER * 1,
     speed = c.METER * 7,
+    max_jumps = 2,
 }
 Player.__index = Player
 
@@ -17,6 +18,7 @@ function Player.new(x, y, world)
         vy = 0,
         world = world,
         facing = "right",
+        jump_count = 0,
     }, Player)
 
     world:add(self, self.x, self.y, self.w, self.h)
@@ -36,7 +38,8 @@ function Player:update(dt)
     self.y = actual_y
 
     for _, col in pairs(cols) do
-        if self.vy > 0 and col.other.type == "ground" then
+        if self.vy > 0 and goal_y > actual_y then
+            self:land()
             self.vy = 0
         end
     end
@@ -59,17 +62,30 @@ function Player:move(dir)
 end
 
 function Player:jump()
-    self.vy = -self.speed
+    if self.jump_count < self.max_jumps then
+        self.vy = -self.speed
+        self.jump_count = self.jump_count + 1
+    end
 end
 
 function Player:hit()
-    local hitter = Hitter.new(self.x, self.y, self.facing, self.world)
+    local x = self.x
+
+    if self.facing == "left" then
+        x = x - c.METER * 0.3
+    end
+
+    local hitter = Hitter.new(x, self.y - c.METER * 0.15, self.facing, self.world)
     return hitter
 end
 
 function Player:draw()
     love.graphics.setColor(0,0.2,1)
     love.graphics.rectangle("fill", self.x, self.y, self.w, self.h)
+end
+
+function Player:land()
+    self.jump_count = 0
 end
 
 function Player.move_filter(item, other)

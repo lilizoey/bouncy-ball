@@ -22,7 +22,9 @@ function Ball.new(x, y, vx, vy, world)
 end
 
 function Ball.move_filter(_, other)
-    if other.type == "player" or other.type == "hitter" then
+    if other.type == "player" or
+       other.type == "hitter" or
+       other.which == "player" then
         return "cross"
     else
         return "bounce"
@@ -53,7 +55,7 @@ function Ball:update(dt)
             self.vy = -self.vy
         end
 
-        if col.other.type == "divider" then
+        if col.other.type == "divider" and col.other.which ~= "player" then
             if self.vy > 0 and actual_y < goal_y then
                 self.vy = -self.vy
             else

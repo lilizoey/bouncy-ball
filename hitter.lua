@@ -2,8 +2,8 @@ local c = require "constants"
 
 local Hitter = {
     type = "hitter",
-    w = c.METER * 0.5,
-    h = c.METER * 0.5,
+    w = c.METER * 0.8,
+    h = c.METER * 0.8,
 }
 Hitter.__index = Hitter
 
