@@ -6,6 +6,7 @@ local consts = {
     HEIGHT = METER * 7,
     TIMESTEP = 1 / 60,
     HITTER_TIMEOUT = 0.2,
+    TEXT_SIZE = 30,
 }
 
 return consts

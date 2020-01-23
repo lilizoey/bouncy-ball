@@ -2,11 +2,21 @@ local bump = require "libraries.bump"
 local Ball = require "ball"
 local AI = require "ai"
 local Player = require "player"
+local ScoreManager = require "score_manager"
 local c = require "constants"
 
 local world = bump.newWorld()
 
 local ball = Ball.new(100, c.HEIGHT - 4 * c.METER, c.METER * 5, 0, world)
+
+ball:register_callback("floor", function (other)
+    if other.which == "left" then
+        ScoreManager.score("right")
+    elseif other.which == "right" then
+        ScoreManager.score("left")
+    end
+end)
+
 local left_wall = {type = "wall", which = "left"}
 local left_floor = {type = "floor", which = "left"}
 local right_wall = {type = "wall", which = "right"}
@@ -52,10 +62,12 @@ local ai = AI.new(player2, ball)
 
 function love.load()
     love.window.setMode(c.WIDTH, c.HEIGHT)
+    love.graphics.setFont(love.graphics.newFont(c.TEXT_SIZE))
 end
 
 function love.draw()
-    ball:draw()
+    ScoreManager.draw("left", 50, 50)
+    ScoreManager.draw("right", c.WIDTH - 50, 50)
     player:draw()
     player2:draw()
     love.graphics.setColor(1,1,1)
@@ -63,6 +75,7 @@ function love.draw()
     for _, obj in pairs(hitters) do
         obj:draw()
     end
+    ball:draw()
 end
 
 local timer = 0

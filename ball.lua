@@ -14,6 +14,7 @@ function Ball.new(x, y, vx, vy, world)
         vx = vx,
         vy = vy,
         world = world,
+        callbacks = {}
     }, Ball)
 
     world:add(self, x, y, self.r * 2, self.r * 2)
@@ -47,6 +48,10 @@ function Ball:update(dt)
     self.y = actual_y
 
     for _, col in pairs(cols) do
+        if self.callbacks[col.other.type] then
+            self.callbacks[col.other.type](col.other)
+        end
+
         if col.other.type == "wall" then
             self.vx = -self.vx
         end
@@ -73,6 +78,10 @@ function Ball:hit(dir)
         self.vx =  7 * c.METER
         self.vy = -3.5 * c.METER
     end
+end
+
+function Ball:register_callback(type, fun)
+    self.callbacks[type] = fun
 end
 
 return Ball

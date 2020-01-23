@@ -34,8 +34,10 @@ function AI:move_to_ball()
 end
 
 function AI:jump_towards_ball()
-    if self.ball.y + self.ball.r * 2 > self.player.y then
+    if self.ball.y + self.ball.r * 2 > self.player.y - self.ball.r * 1 then
         self.state = self.hit_ball
+    elseif self.ball.vy > 0 then
+        self.state = self.move_to_ball
     else
         self.player:jump()
         self.state = self.move_to_ball
