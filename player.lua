@@ -1,29 +1,62 @@
+--- A player that can move around and hit the ball.
+--
+-- classmod: Player
+-- license: GPLv3
+-- author: sayaks
+-- copyright: sayaks 2020
+
 local c = require "constants"
 local Hitter = require "hitter"
+local class = require "libraries.middleclass"
 
-local Player = {
-    type = "player",
-    w = c.METER * 0.5,
-    h = c.METER * 1,
-    speed = c.METER * 7,
-    max_jumps = 2,
-}
-Player.__index = Player
+local Player = class("Player")
 
-function Player.new(x, y, world)
-    local self = setmetatable({
-        x = x,
-        y = y,
-        vx = 0,
-        vy = 0,
-        world = world,
-        facing = "right",
-        jump_count = 0,
-    }, Player)
+--- string: type What type of object this is
+Player.type = "player"
 
+--- number: w width
+Player.w = c.METER * 0.5
+
+--- number: h height
+Player.h = c.METER * 1
+
+--- number: speed The movement speed of a player.
+Player.static.speed = c.METER * 7
+
+--- int: max_jumps The maximum amount of jumps before a player has to land.
+Player.static.max_jumps = 2
+
+--- number: x x-coordinate
+Player.x = nil
+
+--- number: y y-coordinate
+Player.y = nil
+
+--- number: vx x-velocity
+Player.vx = 0
+
+--- number: vy y-velocity
+Player.vy = 0
+
+--- !World: world The world that contains the player.
+Player.world = nil
+
+--- string: facing Which direction the player is facing.
+Player.facing = "right"
+
+--- int: jump_count How many times the player has jumped since touching the ground.
+Player.jump_count = 0
+
+--- Constructor for the Player class
+-- number: x x-coordinate
+-- number: y y-coordinate
+-- !World: world The world of the new player.
+-- treturn: Player
+function Player:initialize(x, y, world)
+    self.x = x
+    self.y = y
+    self.world = world
     world:add(self, self.x, self.y, self.w, self.h)
-
-    return self
 end
 
 function Player:update(dt)
@@ -47,12 +80,12 @@ end
 
 function Player:move(dir)
     if dir == "right" then
-        self.vx = self.speed
+        self.vx = Player.speed
         self.facing = "right"
     end
 
     if dir == "left" then
-        self.vx = -self.speed
+        self.vx = -Player.speed
         self.facing = "left"
     end
 
@@ -62,8 +95,8 @@ function Player:move(dir)
 end
 
 function Player:jump()
-    if self.jump_count < self.max_jumps then
-        self.vy = -self.speed
+    if self.jump_count < Player.max_jumps then
+        self.vy = -Player.speed
         self.jump_count = self.jump_count + 1
     end
 end
