@@ -1,7 +1,7 @@
 local bump = require "libraries.bump"
 local Ball = require "ball"
 local AI = require "ai"
-local Player = require "player"
+local Player = require "Player"
 local ScoreManager = require "score_manager"
 local c = require "constants"
 
@@ -45,8 +45,8 @@ world:add(right_floor, c.WIDTH / 2, c.HEIGHT, c.WIDTH / 2, 5)
 world:add(divider, divider.x, divider.y, divider.w, divider.h)
 world:add(player_divider, player_divider.x, player_divider.y, player_divider.w, player_divider.h)
 
-local player = Player.new(10, 0, world)
-local player2 = Player.new(c.WIDTH - 10 - Player.w, 0, world)
+local player = Player:new(10, 0, world)
+local player2 = Player:new(c.WIDTH - 10 - Player.w, 0, world)
 
 local hitters = {}
 
