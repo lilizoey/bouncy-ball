@@ -1,0 +1,306 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>bouncy-ball documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Methods">Methods</a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><strong>Object</strong></li>
+  <li><a href="../classes/Player.html">Player</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/score_manager.html">score_manager</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>Object</code></h1>
+<p>Abstract superclass of all Game Objects</p>
+<p></p>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: sayaks 2020</li>
+        <li><strong>License</strong>: GPLv3</li>
+        <li><strong>Author</strong>: sayaks</li>
+    </ul>
+
+
+<h2><a href="#Methods">Methods</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Object:initialize">Object:initialize (x, y, world, w, h, r, g, b)</a></td>
+	<td class="summary">Constructor for Objects</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Object:get_height">Object:get_height ()</a></td>
+	<td class="summary">Get the height of an object</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Object:get_width">Object:get_width ()</a></td>
+	<td class="summary">Get the width of an object</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Object:get_x">Object:get_x ()</a></td>
+	<td class="summary">Get the x-coordinate of an object</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Object:get_y">Object:get_y ()</a></td>
+	<td class="summary">Get the y-coordinate of an object</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Object:register_callback">Object:register_callback (name, fun)</a></td>
+	<td class="summary">Register a callback with a name</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Object:call_callback">Object:call_callback (name, ...)</a></td>
+	<td class="summary">Call a named callback function if it exists</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Object:draw">Object:draw ()</a></td>
+	<td class="summary">Fallback drawing method, draws a rectangle.</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Object:initialize"></a>
+    <strong>Object:initialize (x, y, world, w, h, r, g, b)</strong>
+    </dt>
+    <dd>
+    Constructor for Objects
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         x-coordinate
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         y-coordinate
+        </li>
+        <li><span class="parameter">world</span>
+            <span class="types"><span class="type">World</span></span>
+         The world the object is in.
+        </li>
+        <li><span class="parameter">w</span>
+            <span class="types"><span class="type">number</span></span>
+         width
+        </li>
+        <li><span class="parameter">h</span>
+            <span class="types"><span class="type">number</span></span>
+         height
+        </li>
+        <li><span class="parameter">r</span>
+            <span class="types">optional <span class="type">number</span></span>
+         red color for drawing
+        </li>
+        <li><span class="parameter">g</span>
+            <span class="types">optional <span class="type">number</span></span>
+         green color for drawing
+        </li>
+        <li><span class="parameter">b</span>
+            <span class="types">optional <span class="type">number</span></span>
+         blue color for drawing
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Object:get_height"></a>
+    <strong>Object:get_height ()</strong>
+    </dt>
+    <dd>
+    Get the height of an object
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number Height
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Object:get_width"></a>
+    <strong>Object:get_width ()</strong>
+    </dt>
+    <dd>
+    Get the width of an object
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number Width
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Object:get_x"></a>
+    <strong>Object:get_x ()</strong>
+    </dt>
+    <dd>
+    Get the x-coordinate of an object
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number x-coordinate
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Object:get_y"></a>
+    <strong>Object:get_y ()</strong>
+    </dt>
+    <dd>
+    Get the y-coordinate of an object
+
+
+
+    <h3>Returns:</h3>
+    <ol>
+
+        number y-coordinate
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Object:register_callback"></a>
+    <strong>Object:register_callback (name, fun)</strong>
+    </dt>
+    <dd>
+    Register a callback with a name
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         The name of the callback
+        </li>
+        <li><span class="parameter">fun</span>
+            <span class="types"><span class="type">function</span></span>
+         The function to be called
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Object:call_callback"></a>
+    <strong>Object:call_callback (name, ...)</strong>
+    </dt>
+    <dd>
+    Call a named callback function if it exists
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">name</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         Name of callback to call
+        </li>
+        <li><span class="parameter">...</span>
+         Arguments to be passed to callback
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Object:draw"></a>
+    <strong>Object:draw ()</strong>
+    </dt>
+    <dd>
+    Fallback drawing method, draws a rectangle.
+
+
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2020-01-23 04:04:01 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

@@ -1,7 +1,7 @@
 local bump = require "libraries.bump"
 local Ball = require "ball"
 local AI = require "ai"
-local Player = require "Player"
+local Player = require "classes.Player"
 local ScoreManager = require "score_manager"
 local c = require "constants"
 

@@ -1,0 +1,561 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+   "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+<head>
+    <title>bouncy-ball documentation</title>
+    <link rel="stylesheet" href="../ldoc.css" type="text/css" />
+</head>
+<body>
+
+<div id="container">
+
+<div id="product">
+	<div id="product_logo"></div>
+	<div id="product_name"><big><b></b></big></div>
+	<div id="product_description"></div>
+</div> <!-- id="product" -->
+
+
+<div id="main">
+
+
+<!-- Menu -->
+
+<div id="navigation">
+<br/>
+<h1>ldoc</h1>
+
+<ul>
+  <li><a href="../index.html">Index</a></li>
+</ul>
+
+<h2>Contents</h2>
+<ul>
+<li><a href="#Fields">Fields</a></li>
+<li><a href="#Methods">Methods</a></li>
+</ul>
+
+
+<h2>Classes</h2>
+<ul class="nowrap">
+  <li><a href="../classes/Object.html">Object</a></li>
+  <li><strong>Player</strong></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/score_manager.html">score_manager</a></li>
+</ul>
+
+</div>
+
+<div id="content">
+
+<h1>Class <code>Player</code></h1>
+<p>A player that can move around and hit the ball.</p>
+<p> Subclass of Object.
+</p>
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/Object.html#">Object</a>
+    </ul>
+    <h3>Info:</h3>
+    <ul>
+        <li><strong>Copyright</strong>: sayaks 2020</li>
+        <li><strong>License</strong>: GPLv3</li>
+        <li><strong>Author</strong>: sayaks</li>
+    </ul>
+
+
+<h2><a href="#Fields">Fields</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Player.type">Player.type</a></td>
+	<td class="summary"></td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Player.w">Player.w</a></td>
+	<td class="summary"></td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Player.h">Player.h</a></td>
+	<td class="summary"></td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Player.static.speed">Player.static.speed</a></td>
+	<td class="summary"></td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Player.static.max_jumps">Player.static.max_jumps</a></td>
+	<td class="summary"></td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Player.x">Player.x</a></td>
+	<td class="summary"></td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Player.y">Player.y</a></td>
+	<td class="summary"></td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Player.vx">Player.vx</a></td>
+	<td class="summary"></td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Player.vy">Player.vy</a></td>
+	<td class="summary"></td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Player.world">Player.world</a></td>
+	<td class="summary"></td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Player.facing">Player.facing</a></td>
+	<td class="summary"></td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Player.jump_count">Player.jump_count</a></td>
+	<td class="summary"></td>
+	</tr>
+</table>
+<h2><a href="#Methods">Methods</a></h2>
+<table class="function_list">
+	<tr>
+	<td class="name" nowrap><a href="#Player:initialize">Player:initialize (x, y, world)</a></td>
+	<td class="summary">Constructor for the Player class</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Player:update">Player:update (dt)</a></td>
+	<td class="summary">Update the state of the player one timestep</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Player:move">Player:move (dir)</a></td>
+	<td class="summary">Make the player move in a direction</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Player:jump">Player:jump ()</a></td>
+	<td class="summary">Make the player jump</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Player:hit">Player:hit ()</a></td>
+	<td class="summary">Make the player try to hit the ball</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Player:land">Player:land ()</a></td>
+	<td class="summary">Tell the player it has landed</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Player:move_filter">Player:move_filter (item, other)</a></td>
+	<td class="summary">Filter for the move function, see bump library for information</td>
+	</tr>
+</table>
+
+<br/>
+<br/>
+
+
+    <h2 class="section-header "><a name="Fields"></a>Fields</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Player.type"></a>
+    <strong>Player.type</strong>
+    </dt>
+    <dd>
+
+
+
+    <ul>
+        <li><span class="parameter">type</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         What type of object this is
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Player.w"></a>
+    <strong>Player.w</strong>
+    </dt>
+    <dd>
+
+
+
+    <ul>
+        <li><span class="parameter">w</span>
+            <span class="types"><span class="type">number</span></span>
+         width
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Player.h"></a>
+    <strong>Player.h</strong>
+    </dt>
+    <dd>
+
+
+
+    <ul>
+        <li><span class="parameter">h</span>
+            <span class="types"><span class="type">number</span></span>
+         height
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Player.static.speed"></a>
+    <strong>Player.static.speed</strong>
+    </dt>
+    <dd>
+
+
+
+    <ul>
+        <li><span class="parameter">speed</span>
+            <span class="types"><span class="type">number</span></span>
+         The movement speed of a player.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Player.static.max_jumps"></a>
+    <strong>Player.static.max_jumps</strong>
+    </dt>
+    <dd>
+
+
+
+    <ul>
+        <li><span class="parameter">max_jumps</span>
+            <span class="types"><span class="type">int</span></span>
+         The maximum amount of jumps before a player has to land.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Player.x"></a>
+    <strong>Player.x</strong>
+    </dt>
+    <dd>
+
+
+
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         x-coordinate
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Player.y"></a>
+    <strong>Player.y</strong>
+    </dt>
+    <dd>
+
+
+
+    <ul>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         y-coordinate
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Player.vx"></a>
+    <strong>Player.vx</strong>
+    </dt>
+    <dd>
+
+
+
+    <ul>
+        <li><span class="parameter">vx</span>
+            <span class="types"><span class="type">number</span></span>
+         x-velocity
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Player.vy"></a>
+    <strong>Player.vy</strong>
+    </dt>
+    <dd>
+
+
+
+    <ul>
+        <li><span class="parameter">vy</span>
+            <span class="types"><span class="type">number</span></span>
+         y-velocity
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Player.world"></a>
+    <strong>Player.world</strong>
+    </dt>
+    <dd>
+
+
+
+    <ul>
+        <li><span class="parameter">world</span>
+            <span class="types"><span class="type">World</span></span>
+         The world that contains the player.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Player.facing"></a>
+    <strong>Player.facing</strong>
+    </dt>
+    <dd>
+
+
+
+    <ul>
+        <li><span class="parameter">facing</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         Which direction the player is facing.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Player.jump_count"></a>
+    <strong>Player.jump_count</strong>
+    </dt>
+    <dd>
+
+
+
+    <ul>
+        <li><span class="parameter">jump_count</span>
+            <span class="types"><span class="type">int</span></span>
+         How many times the player has jumped since touching the ground.
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
+
+    <dl class="function">
+    <dt>
+    <a name = "Player:initialize"></a>
+    <strong>Player:initialize (x, y, world)</strong>
+    </dt>
+    <dd>
+    Constructor for the Player class
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">x</span>
+            <span class="types"><span class="type">number</span></span>
+         x-coordinate
+        </li>
+        <li><span class="parameter">y</span>
+            <span class="types"><span class="type">number</span></span>
+         y-coordinate
+        </li>
+        <li><span class="parameter">world</span>
+            <span class="types"><span class="type">World</span></span>
+         The world of the new player.
+        </li>
+    </ul>
+
+    <h3>Returns:</h3>
+    <ol>
+
+           <span class="types"><a class="type" href="../classes/Player.html#">Player</a></span>
+
+    </ol>
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Player:update"></a>
+    <strong>Player:update (dt)</strong>
+    </dt>
+    <dd>
+    Update the state of the player one timestep
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">dt</span>
+            <span class="types"><span class="type">number</span></span>
+         Time since last update
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Player:move"></a>
+    <strong>Player:move (dir)</strong>
+    </dt>
+    <dd>
+    Make the player move in a direction
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">dir</span>
+            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
+         Direction to move
+   accepts:
+     * "left" to move left
+     * "right" to move right
+     * "none" to move in no direction
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Player:jump"></a>
+    <strong>Player:jump ()</strong>
+    </dt>
+    <dd>
+    Make the player jump
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Player:hit"></a>
+    <strong>Player:hit ()</strong>
+    </dt>
+    <dd>
+    Make the player try to hit the ball
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Player:land"></a>
+    <strong>Player:land ()</strong>
+    </dt>
+    <dd>
+    Tell the player it has landed
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Player:move_filter"></a>
+    <strong>Player:move_filter (item, other)</strong>
+    </dt>
+    <dd>
+    Filter for the move function, see bump library for information
+
+
+    <h3>Parameters:</h3>
+    <ul>
+        <li><span class="parameter">item</span>
+
+        </li>
+        <li><span class="parameter">other</span>
+
+        </li>
+    </ul>
+
+
+
+
+
+</dd>
+</dl>
+
+
+</div> <!-- id="content" -->
+</div> <!-- id="main" -->
+<div id="about">
+<i>generated by <a href="http://github.com/stevedonovan/LDoc">LDoc 1.4.6</a></i>
+<i style="float:right;">Last updated 2020-01-23 04:04:01 </i>
+</div> <!-- id="about" -->
+</div> <!-- id="container" -->
+</body>
+</html>

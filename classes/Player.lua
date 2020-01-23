@@ -1,5 +1,6 @@
---- A player that can move around and hit the ball.
+--- A player that can move around and hit the ball. Subclass of Object.
 --
+-- see: Object
 -- classmod: Player
 -- license: GPLv3
 -- author: sayaks
@@ -8,7 +9,7 @@
 local c = require "constants"
 local Hitter = require "hitter"
 local class = require "libraries.middleclass"
-local Object = require "Object"
+local Object = require "classes.Object"
 
 local Player = class("Player", Object)
 
