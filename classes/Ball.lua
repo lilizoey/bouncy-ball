@@ -1,25 +1,27 @@
+---
+--
+-- classmod: Ball
+-- see: Object
+-- license: GPLv3
+-- author: sayaks
+-- copyright: sayaks 2020
 local c = require "constants"
+local class = require "libraries.middleclass"
+local Object = require "classes.Object"
+local mixins = require "classes.mixins"
 
-local Ball = {
-    type = "ball",
-    mass = 1,
-    r = c.METER * 0.11,
-}
-Ball.__index = Ball
+local Ball = class("ball", Object)
+Ball:include(mixins.Gravity)
 
-function Ball.new(x, y, vx, vy, world)
-    local self = setmetatable({
-        x = x,
-        y = y,
-        vx = vx,
-        vy = vy,
-        world = world,
-        callbacks = {}
-    }, Ball)
+local RADIUS = c.METER * 0.11
 
-    world:add(self, x, y, self.r * 2, self.r * 2)
-
-    return self
+function Ball:initialize(x, y, vx, vy, world)
+    Object.initialize(self, x, y, world, RADIUS * 2, RADIUS * 2, 1, 0.5, 0)
+    self.vx = vx
+    self.vy = vy
+    self.type = "ball"
+    self.radius = RADIUS
+    world:add(self, x, y, self.radius * 2, self.radius * 2)
 end
 
 function Ball.move_filter(_, other)
@@ -32,13 +34,16 @@ function Ball.move_filter(_, other)
     end
 end
 
+--- Draw the ball as a circle
 function Ball:draw()
-    love.graphics.setColor(1,0.5,0)
-    love.graphics.circle("fill", self.x + self.r, self.y + self.r, self.r)
+    love.graphics.setColor(self.r, self.g, self.b)
+    love.graphics.circle("fill", self.x + self.radius, self.y + self.radius, self.radius)
 end
 
+--- Update the ball's position and velocity.
+-- number: dt Time since last update.
 function Ball:update(dt)
-    self.vy = self.vy + c.METER * 10 * dt
+    self:apply_gravity(dt)
     local goal_x = self.x + self.vx * dt
     local goal_y = self.y + self.vy * dt
 
@@ -48,9 +53,7 @@ function Ball:update(dt)
     self.y = actual_y
 
     for _, col in pairs(cols) do
-        if self.callbacks[col.other.type] then
-            self.callbacks[col.other.type](col.other)
-        end
+        self:call_callback(col.other.type, col.other)
 
         if col.other.type == "wall" then
             self.vx = -self.vx
@@ -70,6 +73,8 @@ function Ball:update(dt)
     end
 end
 
+--- Spawn a hitter to hit the ball
+-- string: dir Which direction to spawn the hitter in
 function Ball:hit(dir)
     if dir == "left" then
         self.vx = -7 * c.METER
@@ -78,10 +83,6 @@ function Ball:hit(dir)
         self.vx =  7 * c.METER
         self.vy = -3.5 * c.METER
     end
-end
-
-function Ball:register_callback(type, fun)
-    self.callbacks[type] = fun
 end
 
 return Ball

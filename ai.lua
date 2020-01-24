@@ -1,16 +1,12 @@
 local c = require "constants"
+local class = require "libraries.middleclass"
 
-local AI = {}
-AI.__index = AI
+local AI = class("ai")
 
-function AI.new(player, ball)
-    local self = setmetatable({
-        player = player,
-        ball = ball,
-        state = nil
-    }, AI)
-
-    return self
+function AI:initialize(player, ball)
+    self.player = player
+    self.ball = ball
+    self.state = nil
 end
 
 function AI:update(dt)
@@ -34,7 +30,7 @@ function AI:move_to_ball()
 end
 
 function AI:jump_towards_ball()
-    if self.ball.y + self.ball.r * 2 > self.player.y - self.ball.r * 1 then
+    if self.ball.y + self.ball.radius * 2 > self.player.y - self.ball.radius * 1 then
         self.state = self.hit_ball
     elseif self.ball.vy > 0 then
         self.state = self.move_to_ball

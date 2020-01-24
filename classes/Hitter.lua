@@ -1,25 +1,17 @@
 local c = require "constants"
+local Object = require "classes.Object"
+local class = require "libraries.middleclass"
 
-local Hitter = {
-    type = "hitter",
-    w = c.METER * 0.8,
-    h = c.METER * 0.8,
-}
-Hitter.__index = Hitter
+local Hitter = class("hitter", Object)
 
-function Hitter.new(x, y, dir, world)
-    local self = setmetatable({
-        hit = false,
-        x = x,
-        y = y,
-        dir = dir,
-        world = world,
-        timer = 0,
-    }, Hitter)
+function Hitter:initialize(x, y, dir, world)
+    Object.initialize(self, x, y, world, c.METER * 0.8, c.METER * 0.8)
+    self.type = "hitter"
+    self.hit = false
+    self.dir = dir
+    self.timer = 0
 
     world:add(self, x, y, self.w, self.h)
-
-    return self
 end
 
 function Hitter:update(dt)

@@ -1,5 +1,5 @@
 local bump = require "libraries.bump"
-local Ball = require "ball"
+local Ball = require "classes.Ball"
 local AI = require "ai"
 local Player = require "classes.Player"
 local ScoreManager = require "score_manager"
@@ -7,7 +7,7 @@ local c = require "constants"
 
 local world = bump.newWorld()
 
-local ball = Ball.new(100, c.HEIGHT - 4 * c.METER, c.METER * 5, 0, world)
+local ball = Ball:new(100, c.HEIGHT - 4 * c.METER, c.METER * 5, 0, world)
 
 ball:register_callback("floor", function (other)
     if other.which == "left" then
@@ -58,7 +58,7 @@ local function prune_hitters()
     end
 end
 
-local ai = AI.new(player2, ball)
+local ai = AI:new(player2, ball)
 
 function love.load()
     love.window.setMode(c.WIDTH, c.HEIGHT)
@@ -91,9 +91,9 @@ function love.update(dt)
         ball:update(c.TIMESTEP)
         player:update(c.TIMESTEP)
         player2:update(c.TIMESTEP)
-        if love.keyboard.isDown("left") then
+        if love.keyboard.isDown("left") or love.keyboard.isDown("a") then
             player:move("left")
-        elseif love.keyboard.isDown("right") then
+        elseif love.keyboard.isDown("right") or love.keyboard.isDown("d") then
             player:move("right")
         else
             player:move("none")
@@ -107,10 +107,10 @@ function love.update(dt)
 end
 
 function love.keypressed(key)
-    if key == "up" then
+    if key == "up" or key == "w" or key == "j" then
         player:jump()
     end
-    if key == "space" then
+    if key == "space" or key == "k" then
         table.insert(hitters, player:hit())
     end
 end

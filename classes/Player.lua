@@ -7,11 +7,13 @@
 -- copyright: sayaks 2020
 
 local c = require "constants"
-local Hitter = require "hitter"
+local Hitter = require "classes.Hitter"
 local class = require "libraries.middleclass"
 local Object = require "classes.Object"
+local mixins = require "classes.mixins"
 
 local Player = class("Player", Object)
+Player:include(mixins.Gravity)
 
 --- string: type What type of object this is
 Player.type = "player"
@@ -55,14 +57,14 @@ Player.jump_count = 0
 -- !World: world The world of the new player.
 -- treturn: Player
 function Player:initialize(x, y, world)
-    Object:initialize(x, y, world, Player.w, Player.h, 0, 0.2, 0.8)
+    Object.initialize(self, x, y, world, Player.w, Player.h, 0, 0.2, 0.8)
     world:add(self, x, y, Player.w, Player.h)
 end
 
 --- Update the state of the player one timestep
 -- number: dt Time since last update
 function Player:update(dt)
-    self.vy = self.vy + c.METER * 10 * dt
+    self:apply_gravity(dt)
 
     local goal_x = self.x + self.vx * dt
     local goal_y = self.y + self.vy * dt
@@ -118,7 +120,7 @@ function Player:hit()
         x = x - c.METER * 0.3
     end
 
-    local hitter = Hitter.new(x, self.y - c.METER * 0.15, self.facing, self.world)
+    local hitter = Hitter:new(x, self.y - c.METER * 0.15, self.facing, self.world)
     return hitter
 end
 
