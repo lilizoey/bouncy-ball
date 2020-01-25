@@ -18,7 +18,8 @@ Module.Menu = Menu
 -- number: x x coordinate
 -- number: y y coordinate
 -- number: w width of the menu
-function Menu:initialize(x, y, w)
+function Menu:initialize(x, y, w, cols)
+    self.cols = cols or 1
     self.x = x
     self.y = y
     self.w = w
@@ -28,10 +29,24 @@ end
 
 --- Recreate the layout of the menu
 function Menu:update_layout()
-    local prev_bottom = self.y
+    local col = 1
+    local cur_col_x = self.x
+    local cur_row_y = self.y
+    local button_width = (self.w - self.spacing * (self.cols - 1)) / self.cols
+
     for _, button in pairs(self.buttons) do
-        button:set_y(prev_bottom + self.spacing)
-        prev_bottom = prev_bottom + button:get_height() + self.spacing
+        button:set_x(cur_col_x)
+        button:set_y(cur_row_y)
+        button:set_width(button_width)
+
+        if col < self.cols then
+            col = col + 1
+            cur_col_x = cur_col_x + button_width + self.spacing
+        else
+            col = 1
+            cur_row_y = cur_row_y + Module.Button.get_height() + self.spacing
+            cur_col_x = self.x
+        end
     end
 end
 
@@ -39,11 +54,15 @@ end
 -- string: text the text that the button will display
 -- treturn: Button the newly created button
 function Menu:add(text)
-    local new_button = Module.Button:new(text, self.x, self.y, self.w)
-    table.insert(self.buttons, new_button)
-    self:update_layout()
+    local new_button = Module.Button:new(text)
+    self:add_button(new_button)
 
     return new_button
+end
+
+function Menu:add_button(button)
+    table.insert(self.buttons, button)
+    self:update_layout()   
 end
 
 --- Update the status of all the buttons in the menu
@@ -86,19 +105,20 @@ Button.static.font = love.graphics.newFont(Button.font_size)
 -- number: x x coordinate of button
 -- number: y y coordinate of button
 -- number: w width
-function Button:initialize(text, x, y, w)
+function Button:initialize(text)
     self.text = text
-    self.x = x
-    self.y = y
-    self.w = w
     self.centered = true
     self.selected = false
 end
 
 --- Calculate the height of the button
 -- return: number
-function Button:get_height()
+function Button.get_height()
     return Button.font:getHeight() + 10
+end
+
+function Button:set_width(w)
+    self.w = w
 end
 
 function Button:set_x(x)
@@ -176,8 +196,8 @@ end
 KeyButton = class("keybutton", Button)
 Module.KeyButton = KeyButton
 
-function KeyButton:initialize(action, x, y, w)
-    Button.initialize(self, action .. ": " .. settings.get_setting(action .. "_button"), x, y, w)
+function KeyButton:initialize(action)
+    Button.initialize(self, action .. ": " .. settings.get_setting(action .. "_button"))
     self.action = action
     self.key_change = false
     settings.add_callback(action .. "_button", function (v) self:update_text(v) end)
@@ -185,7 +205,6 @@ end
 
 function KeyButton:update()
     Button.update(self)
-    --print(self.action, self.key_change, self.selected)
 end
 
 function KeyButton:change_key(new_key)
@@ -201,7 +220,6 @@ function KeyButton:mousepressed(x, y, button)
 end
 
 function KeyButton:keypressed(key)
-    print(key, self.key_change)
     if self.key_change then
         self:change_key(key)
         self.key_change = false
@@ -211,5 +229,7 @@ end
 function KeyButton:update_text(val)
     self.text = self.action .. ": " .. val
 end
+
+-- 
 
 return Module

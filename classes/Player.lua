@@ -114,14 +114,14 @@ function Player:jump()
 end
 
 --- Make the player try to hit the ball
-function Player:hit()
+function Player:hit(which)
     local x = self.x
 
     if self.facing == "left" then
         x = x - c.METER * 0.3
     end
 
-    local hitter = Hitter:new(x, self.y - c.METER * 0.15, self.facing, self.world)
+    local hitter = Hitter:new(x, self.y - c.METER * 0.15, self.facing, self.world, which)
     return hitter
 end
 
@@ -147,8 +147,12 @@ function Player:keypressed(key, object_table)
         self:jump()
     end
 
-    if key == settings.get_setting("hit_button") then
-        table.insert(object_table, self:hit())
+    if key == settings.get_setting("long_hit_button") then
+        table.insert(object_table, self:hit("long"))
+    end
+
+    if key == settings.get_setting("lob_hit_button") then
+        table.insert(object_table, self:hit("lob"))
     end
 end
 

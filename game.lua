@@ -45,7 +45,7 @@ function Game.reset()
     add_wall(0, c.HEIGHT, c.WIDTH / 2, 5, "floor", "left")
     add_wall(c.WIDTH / 2, c.HEIGHT, c.WIDTH / 2, 5, "floor", "right")
     add_wall(c.WIDTH / 2 - c.METER / 6, c.HEIGHT - c.METER * 1.5, c.METER / 3, c.METER * 1.5, "divider", "all")
-    add_wall(c.WIDTH / 2 - c.METER / 6, 0, c.METER / 3, c.HEIGHT, "divider", "player", true)
+    add_wall(c.WIDTH / 2 - c.METER / 6 - 0.1, 0, c.METER / 3 + 0.2, c.HEIGHT, "divider", "player", true)
 
     local player_1 = Player:new(c.METER / 2, c.HEIGHT - Player.h, Game.world)
     local player_2 = Player:new(c.WIDTH - c.METER / 2 - Player.w, c.HEIGHT - Player.h, Game.world)

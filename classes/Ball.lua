@@ -81,13 +81,19 @@ end
 
 --- Spawn a hitter to hit the ball
 -- string: dir Which direction to spawn the hitter in
-function Ball:hit(dir)
+function Ball:hit(dir, which)
+    if which == "lob" then
+        self.vx = 3.5 * c.METER
+        self.vy = -7 * c.METER
+    end
+
+    if which == "long" then
+        self.vx = 7 * c.METER
+        self.vy = -3.5 * c.METER
+    end
+
     if dir == "left" then
-        self.vx = -7 * c.METER
-        self.vy = -3.5 * c.METER
-    elseif dir == "right" then
-        self.vx =  7 * c.METER
-        self.vy = -3.5 * c.METER
+        self.vx = -self.vx
     end
 end
 

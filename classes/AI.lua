@@ -43,7 +43,11 @@ end
 
 function AI:hit_ball()
     self.state = self.move_to_ball
-    table.insert(self.gameobject_table, self.player:hit())
+    if self.player.y < c.METER * 3 then
+        table.insert(self.gameobject_table, self.player:hit("lob"))
+    else
+        table.insert(self.gameobject_table, self.player:hit("long"))
+    end
 end
 
 return AI

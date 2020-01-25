@@ -16,12 +16,13 @@ local Hitter = class("hitter", Object)
 -- number: y initial y coordinate
 -- string: dir which direction to hit the ball
 -- !World: world the world that the hitter is in
-function Hitter:initialize(x, y, dir, world)
+function Hitter:initialize(x, y, dir, world, which)
     Object.initialize(self, x, y, world, c.METER * 0.8, c.METER * 0.8)
     self.type = "hitter"
     self.hit = false
     self.dir = dir
     self.timer = 0
+    self.which = which
 
     world:add(self, x, y, self.w, self.h)
 end
@@ -45,7 +46,7 @@ function Hitter:update(dt)
     for _, col in pairs(cols) do
         if col.other.type == "ball" then
             self:destroy()
-            col.other:hit(self.dir)
+            col.other:hit(self.dir, self.which)
         end
     end
 end

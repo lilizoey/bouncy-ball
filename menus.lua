@@ -35,18 +35,20 @@ Module.main_menu:add("Settings"):register_onclick(function ()
 end)
 
 Module.settings = MenuModule.Menu:new(
-    c.WIDTH / 2 - 100,
+    c.WIDTH / 2 - 200,
     100,
-    200
+    400,
+    2
 )
 
 Module.settings:add("Back"):register_onclick(function ()
     Module.switch_state(Module.main_menu)
 end)
 
-table.insert(Module.settings.buttons, MenuModule.KeyButton:new("right", c.WIDTH / 2 - 100,
-100,
-200))
-Module.settings:update_layout()
+Module.settings:add_button(MenuModule.KeyButton:new("jump"))
+Module.settings:add_button(MenuModule.KeyButton:new("left"))
+Module.settings:add_button(MenuModule.KeyButton:new("right"))
+Module.settings:add_button(MenuModule.KeyButton:new("long_hit"))
+Module.settings:add_button(MenuModule.KeyButton:new("lob_hit"))
 
 return Module
