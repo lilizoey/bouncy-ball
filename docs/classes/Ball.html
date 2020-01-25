@@ -32,31 +32,33 @@
 
 <h2>Contents</h2>
 <ul>
-<li><a href="#Functions">Functions</a></li>
+<li><a href="#Methods">Methods</a></li>
 </ul>
 
 
-<h2>Modules</h2>
-<ul class="nowrap">
-  <li><strong>score_manager</strong></li>
-</ul>
 <h2>Classes</h2>
 <ul class="nowrap">
-  <li><a href="../classes/Ball.html">Ball</a></li>
+  <li><strong>Ball</strong></li>
   <li><a href="../classes/Hitter.html">Hitter</a></li>
   <li><a href="../classes/Object.html">Object</a></li>
   <li><a href="../classes/Player.html">Player</a></li>
+</ul>
+<h2>Modules</h2>
+<ul class="nowrap">
+  <li><a href="../modules/score_manager.html">score_manager</a></li>
 </ul>
 
 </div>
 
 <div id="content">
 
-<h1>Module <code>score_manager</code></h1>
-<p>A Score Managing Module
- that keeps track of an arbitrary amount of scores and draws them to the
- screen.</p>
+<h1>Class <code>Ball</code></h1>
 <p></p>
+<p></p>
+    <h3>See also:</h3>
+    <ul>
+         <a href="../classes/Object.html#">Object</a>
+    </ul>
     <h3>Info:</h3>
     <ul>
         <li><strong>Copyright</strong>: sayaks 2020</li>
@@ -65,15 +67,19 @@
     </ul>
 
 
-<h2><a href="#Functions">Functions</a></h2>
+<h2><a href="#Methods">Methods</a></h2>
 <table class="function_list">
 	<tr>
-	<td class="name" nowrap><a href="#Module.score">Module.score (which)</a></td>
-	<td class="summary">Add a point to a tracked player</td>
+	<td class="name" nowrap><a href="#Ball:draw">Ball:draw ()</a></td>
+	<td class="summary">Draw the ball as a circle</td>
 	</tr>
 	<tr>
-	<td class="name" nowrap><a href="#Module.draw">Module.draw (which, x, y)</a></td>
-	<td class="summary">Draw a score to the screen.</td>
+	<td class="name" nowrap><a href="#Ball:update">Ball:update (dt)</a></td>
+	<td class="summary">Update the ball's position and velocity.</td>
+	</tr>
+	<tr>
+	<td class="name" nowrap><a href="#Ball:hit">Ball:hit (dir)</a></td>
+	<td class="summary">Spawn a hitter to hit the ball</td>
 	</tr>
 </table>
 
@@ -81,22 +87,36 @@
 <br/>
 
 
-    <h2 class="section-header "><a name="Functions"></a>Functions</h2>
+    <h2 class="section-header "><a name="Methods"></a>Methods</h2>
 
     <dl class="function">
     <dt>
-    <a name = "Module.score"></a>
-    <strong>Module.score (which)</strong>
+    <a name = "Ball:draw"></a>
+    <strong>Ball:draw ()</strong>
     </dt>
     <dd>
-    Add a point to a tracked player
+    Draw the ball as a circle
+
+
+
+
+
+
+
+</dd>
+    <dt>
+    <a name = "Ball:update"></a>
+    <strong>Ball:update (dt)</strong>
+    </dt>
+    <dd>
+    Update the ball's position and velocity.
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">which</span>
-            <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-         The player that got a point
+        <li><span class="parameter">dt</span>
+            <span class="types"><span class="type">number</span></span>
+         Time since last update.
         </li>
     </ul>
 
@@ -106,28 +126,18 @@
 
 </dd>
     <dt>
-    <a name = "Module.draw"></a>
-    <strong>Module.draw (which, x, y)</strong>
+    <a name = "Ball:hit"></a>
+    <strong>Ball:hit (dir)</strong>
     </dt>
     <dd>
-    Draw a score to the screen.
- Note that drawing at non-integer coordinates will give blurry text.
-
+    Spawn a hitter to hit the ball
 
 
     <h3>Parameters:</h3>
     <ul>
-        <li><span class="parameter">which</span>
+        <li><span class="parameter">dir</span>
             <span class="types"><a class="type" href="https://www.lua.org/manual/5.3/manual.html#6.4">string</a></span>
-         The player whose score should be drawn
-        </li>
-        <li><span class="parameter">x</span>
-            <span class="types"><span class="type">number</span></span>
-
-        </li>
-        <li><span class="parameter">y</span>
-            <span class="types"><span class="type">number</span></span>
-
+         Which direction to spawn the hitter in
         </li>
     </ul>
 

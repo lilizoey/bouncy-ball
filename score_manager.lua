@@ -17,6 +17,12 @@ local function init_score(which)
     end
 end
 
+function Module.reset()
+    for key, _ in pairs(scores) do
+        scores[key] = 0
+    end
+end
+
 --- Add a point to a tracked player
 -- string: which The player that got a point
 function Module.score(which)

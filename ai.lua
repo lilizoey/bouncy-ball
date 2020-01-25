@@ -3,10 +3,11 @@ local class = require "libraries.middleclass"
 
 local AI = class("ai")
 
-function AI:initialize(player, ball)
+function AI:initialize(player, ball, gameobject_table)
     self.player = player
     self.ball = ball
     self.state = nil
+    self.gameobject_table = gameobject_table
 end
 
 function AI:update(dt)
@@ -42,7 +43,7 @@ end
 
 function AI:hit_ball()
     self.state = self.move_to_ball
-    return self.player:hit()
+    table.insert(self.gameobject_table, self.player:hit())
 end
 
 return AI

@@ -1,3 +1,10 @@
+--- Hitter
+-- classmod: Hitter
+-- see: Object
+-- license: GPLv3
+-- author: sayaks
+-- copyright: sayaks 2020
+
 local c = require "constants"
 local Object = require "classes.Object"
 local class = require "libraries.middleclass"

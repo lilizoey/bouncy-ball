@@ -138,4 +138,26 @@ function Player.move_filter(item, other)
     end
 end
 
+function Player:keypressed(key, object_table)
+    if key == "j" or key == "up" or key == "w" then
+        self:jump()
+    end
+
+    if key == "k" or key == "space" then
+        table.insert(object_table, self:hit())
+    end
+end
+
+function Player:key_down_handler()
+    local left = love.keyboard.isDown("left") or love.keyboard.isDown("a")
+    local right = love.keyboard.isDown("right") or love.keyboard.isDown("d")
+    if left and right or not (left or right) then
+        self:move("none")
+    elseif left then
+        self:move("left")
+    else
+        self:move("right")
+    end
+end
+
 return Player

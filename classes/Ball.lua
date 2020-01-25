@@ -13,14 +13,14 @@ local mixins = require "classes.mixins"
 local Ball = class("ball", Object)
 Ball:include(mixins.Gravity)
 
-local RADIUS = c.METER * 0.11
+Ball.RADIUS = c.METER * 0.11
 
 function Ball:initialize(x, y, vx, vy, world)
-    Object.initialize(self, x, y, world, RADIUS * 2, RADIUS * 2, 1, 0.5, 0)
+    Object.initialize(self, x, y, world, Ball.RADIUS * 2, Ball.RADIUS * 2, 1, 0.5, 0)
     self.vx = vx
     self.vy = vy
     self.type = "ball"
-    self.radius = RADIUS
+    self.radius = Ball.RADIUS
     world:add(self, x, y, self.radius * 2, self.radius * 2)
 end
 

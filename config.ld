@@ -1,7 +1,6 @@
 file = {
-    "classes/Object.lua",
-    "classes/Player.lua",
-    "score_manager.lua"
+    "score_manager.lua",
+    "classes"
 }
 title = "bouncy-ball documentation"
 description = "bouncy-ball is a simple game where you try to hit a ball"
