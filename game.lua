@@ -4,7 +4,7 @@ local bump = require "libraries.bump"
 local c = require "constants"
 local Player = require "classes.Player"
 local Ball = require "classes.Ball"
-local AI = require "ai"
+local AI = require "classes.AI"
 local score_manager = require "score_manager"
 
 Game.world = bump.newWorld()

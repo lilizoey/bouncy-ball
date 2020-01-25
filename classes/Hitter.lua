@@ -1,4 +1,4 @@
---- Hitter
+--- A box that hits a ball away
 -- classmod: Hitter
 -- see: Object
 -- license: GPLv3
@@ -11,6 +11,11 @@ local class = require "libraries.middleclass"
 
 local Hitter = class("hitter", Object)
 
+--- Constructor for Hitter
+-- number: x initial x coordinate
+-- number: y initial y coordinate
+-- string: dir which direction to hit the ball
+-- !World: world the world that the hitter is in
 function Hitter:initialize(x, y, dir, world)
     Object.initialize(self, x, y, world, c.METER * 0.8, c.METER * 0.8)
     self.type = "hitter"
@@ -21,6 +26,8 @@ function Hitter:initialize(x, y, dir, world)
     world:add(self, x, y, self.w, self.h)
 end
 
+--- Update the state of a hitter
+-- number: dt time since last update
 function Hitter:update(dt)
     if self.hit then
         return
@@ -47,11 +54,13 @@ function Hitter.move_filter(item, other)
     return "cross"
 end
 
+--- Flag the hitter for destruction
 function Hitter:destroy()
     self.world:remove(self)
     self.hit = true
 end
 
+--- Draw a hitter to the screen
 function Hitter:draw()
     if self.hit then
         return

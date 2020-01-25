@@ -11,6 +11,7 @@ local Hitter = require "classes.Hitter"
 local class = require "libraries.middleclass"
 local Object = require "classes.Object"
 local mixins = require "classes.mixins"
+local settings = require "settings_manager"
 
 local Player = class("Player", Object)
 Player:include(mixins.Gravity)
@@ -138,19 +139,23 @@ function Player.move_filter(item, other)
     end
 end
 
+--- Choose what action to take depending on a keypress
+-- string: key which key was pressed
+-- Array(Object): object_table table of objects to insert a hitter into
 function Player:keypressed(key, object_table)
-    if key == "j" or key == "up" or key == "w" then
+    if key == settings.get_setting("jump_button") then
         self:jump()
     end
 
-    if key == "k" or key == "space" then
+    if key == settings.get_setting("hit_button") then
         table.insert(object_table, self:hit())
     end
 end
 
+--- Check if a key is down and respond correspondingly
 function Player:key_down_handler()
-    local left = love.keyboard.isDown("left") or love.keyboard.isDown("a")
-    local right = love.keyboard.isDown("right") or love.keyboard.isDown("d")
+    local left = love.keyboard.isDown(settings.get_setting("left_button"))
+    local right = love.keyboard.isDown(settings.get_setting("right_button"))
     if left and right or not (left or right) then
         self:move("none")
     elseif left then

@@ -1,4 +1,4 @@
----
+--- A ball that bounces around and has gravity.
 --
 -- classmod: Ball
 -- see: Object
@@ -15,6 +15,12 @@ Ball:include(mixins.Gravity)
 
 Ball.RADIUS = c.METER * 0.11
 
+--- Constructor for ball
+-- number: x initial x coordinate
+-- number: y initial y coordinate
+-- number: vx initial x velocity
+-- number: vy initial y velocity
+-- !World: world the Bump world that the ball is in.
 function Ball:initialize(x, y, vx, vy, world)
     Object.initialize(self, x, y, world, Ball.RADIUS * 2, Ball.RADIUS * 2, 1, 0.5, 0)
     self.vx = vx
@@ -34,7 +40,7 @@ function Ball.move_filter(_, other)
     end
 end
 
---- Draw the ball as a circle
+--- Draw the ball as an orange circle
 function Ball:draw()
     love.graphics.setColor(self.r, self.g, self.b)
     love.graphics.circle("fill", self.x + self.radius, self.y + self.radius, self.radius)
